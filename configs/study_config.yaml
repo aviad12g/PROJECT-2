@@ -1,5 +1,5 @@
 model:
-  name: gemini-1.0-pro-002  # ✅ or gemini-1.5-flash-preview if needed
+  name: gemini-2.0-flash
   provider: vertexai
   parameters:
     temperature: 0.0
