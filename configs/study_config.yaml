@@ -1,0 +1,27 @@
+# Study configuration for ARC-Easy evaluation with Deterministic Category-Based Sampling (DCBS)
+
+# Model configuration
+model:
+  name: meta-llama/Llama-3.2-1B-Instruct
+  max_length: 2048
+  device: cuda
+
+# Data configuration
+data:
+  input_file: results/arc_easy_dev.jsonl
+  output_file: results/exp_sweeps.csv
+
+# Prompting configuration
+prompt:
+  template: "{prompt}\nThe answer is {choices}."
+  reasoning_prefix: "Let's think step by step."
+  answer_format: "The answer is"
+
+# DCBS configuration
+decoding_methods:
+  dcbs:
+    name: Deterministic Category-Based Sampling (DCBS)
+    method: dcbs
+    parameters:
+      max_new_tokens: 256  # Maximum number of new tokens to generate
+      cot_delimiter: "\n\nAnswer:"  # Delimiter between chain-of-thought and final answer 

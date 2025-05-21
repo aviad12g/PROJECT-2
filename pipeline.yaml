@@ -1,0 +1,18 @@
+apiVersion: pipelines.kubeflow.org/v1
+kind: Pipeline
+metadata:
+  name: arc-easy-gemini-eval
+spec:
+  tasks:
+    - name: batch-predict
+      component:
+        kind: BatchPredict
+        spec:
+          model: projects/superb-shelter-459120-p3/locations/us-central1/models/text-bison@001
+          inputDataConfig:
+            gcsSource:
+              uris: ["gs://arc-easy-bucket/arc_easy_dev.jsonl"]
+            instancesFormat: jsonl
+          outputConfig:
+            gcsDestination:
+              outputUriPrefix: gs://arc-easy-bucket/arc_easy_preds/
