@@ -2,9 +2,10 @@
 
 # Model configuration
 model:
-  name: gemini/gemini-pro
+  name: gemini-1.0-pro-002
   provider: vertexai
   parameters:
+    temperature: 0.0
     max_tokens: 2048
 
 # Data configuration
