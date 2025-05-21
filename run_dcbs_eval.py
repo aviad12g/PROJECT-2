@@ -27,7 +27,7 @@ class DecodingMethodEvaluator:
 
         model_id = config["model"]["name"]
         print(f"Loading Gemini model: {model_id}")
-        chat_model = ChatModel.from_pretrained(model_id)
+        chat_model = ChatModel.from_pretrained(model_id)  # ✅ uses YAML value
         self.chat = chat_model.start_chat()
 
         # Load data
@@ -107,7 +107,7 @@ class DecodingMethodEvaluator:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run ARC-Easy evaluation with Gemini 2.0 Flash"
+        description="Run ARC-Easy evaluation with Gemini Flash"
     )
     parser.add_argument(
         "--config", type=str, required=True, help="Path to config YAML file"
@@ -124,8 +124,7 @@ def main():
         config, inject_reasoning=args.inject_reasoning
     )
 
-    # Gemini doesn’t use token-level cluster logic; dummy strategy
-    cluster_ids = {}
+    cluster_ids = {}  # No token clustering for Gemini
     strategy = DeterministicCategoryStrategy(cluster_ids)
 
     evaluator.evaluate(strategy)
